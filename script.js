@@ -13,12 +13,15 @@ const getPlayerPick = () => {
         player_selection = prompt("Rock, Paper, Scissors! Which one do you want to pick?\n 1. (R)ock\n 2. (P)aper\n 3. (S)cissors");
         if (player_selection === null) {
             return false;
-        } else if (player_selection == 1 || player_selection.toUpperCase() == "R" || player_selection.toUpperCase() == "ROCK") {
-            player_selection = "ROCK";
-        } else if (player_selection == 2 || player_selection.toUpperCase() == "P" || player_selection.toUpperCase() == "PAPER") {
-            player_selection = "PAPER";
-        } else if (player_selection == 3 || player_selection.toUpperCase() == "S" || player_selection.toUpperCase() == "SCISSORS") {
-            player_selection = "SCISSORS";
+        } else {
+            player_selection = player_selection.toUpperCase().trim();
+            if (player_selection == 1 || player_selection == "R" || player_selection == "ROCK") {
+                player_selection = "ROCK";
+            } else if (player_selection == 2 || player_selection == "P" || player_selection == "PAPER") {
+                player_selection = "PAPER";
+            } else if (player_selection == 3 || player_selection == "S" || player_selection == "SCISSORS") {
+                player_selection = "SCISSORS";
+            }
         }
     } while (!isPlayerPickCorrect(player_selection));
     
@@ -44,46 +47,46 @@ const startRound = (player_selection, computer_selection, player_round_win, comp
         player_round_win: player_round_win,
         computer_round_win: computer_round_win,
     };
-    console.log(`Player picks ${player_selection.toUpperCase()}`);
+    console.log(`Player picks ${player_selection}`);
     console.log(`Computer picks ${computer_selection}`);
-    if (player_selection.toUpperCase() == "ROCK") {
+    if (player_selection == "ROCK") {
         if (computer_selection == "ROCK") {
             console.log("It\'s a DRAW!");
-            alert(`Player picks ${player_selection.toUpperCase()}\nComputer picks ${computer_selection}\n\nIt\'s a DRAW!`);
+            alert(`Player picks ${player_selection}\nComputer picks ${computer_selection}\n\nIt\'s a DRAW!`);
         } else if (computer_selection == "PAPER") {
             round_result.computer_round_win += 1;
             console.log("Computer WIN! PAPER beats ROCK");
-            alert(`Player picks ${player_selection.toUpperCase()}\nComputer picks ${computer_selection}\n\nComputer WIN! PAPER beats ROCK`);
+            alert(`Player picks ${player_selection}\nComputer picks ${computer_selection}\n\nComputer WIN! PAPER beats ROCK`);
         } else if (computer_selection == "SCISSORS") {
             round_result.player_round_win += 1;
             console.log("You WIN! ROCK beats SCISSORS");
-            alert(`Player picks ${player_selection.toUpperCase()}\nComputer picks ${computer_selection}\n\nYou WIN! ROCK beats SCISSORS`);
+            alert(`Player picks ${player_selection}\nComputer picks ${computer_selection}\n\nYou WIN! ROCK beats SCISSORS`);
         }
-    } else if (player_selection.toUpperCase() == "PAPER") {
+    } else if (player_selection == "PAPER") {
         if (computer_selection == "ROCK") {
             round_result.player_round_win += 1;
             console.log("You WIN! PAPER beats ROCK");
-            alert(`Player picks ${player_selection.toUpperCase()}\nComputer picks ${computer_selection}\n\nYou WIN! PAPER beats ROCK`);
+            alert(`Player picks ${player_selection}\nComputer picks ${computer_selection}\n\nYou WIN! PAPER beats ROCK`);
         } else if (computer_selection == "PAPER") {
             console.log("It\'s a DRAW!");
-            alert(`Player picks ${player_selection.toUpperCase()}\nComputer picks ${computer_selection}\n\nIt\'s a DRAW!`);
+            alert(`Player picks ${player_selection}\nComputer picks ${computer_selection}\n\nIt\'s a DRAW!`);
         } else if (computer_selection == "SCISSORS") {
             round_result.computer_round_win += 1;
             console.log("Computer WIN! SCISSORS beats PAPER");
-            alert(`Player picks ${player_selection.toUpperCase()}\nComputer picks ${computer_selection}\n\nComputer WIN! SCISSORS beats PAPER`);
+            alert(`Player picks ${player_selection}\nComputer picks ${computer_selection}\n\nComputer WIN! SCISSORS beats PAPER`);
         }
-    } else if (player_selection.toUpperCase() == "SCISSORS") {
+    } else if (player_selection == "SCISSORS") {
         if (computer_selection == "ROCK") {
             round_result.computer_round_win += 1;
             console.log("Computer WIN! ROCK beats SCISSORS");
-            alert(`Player picks ${player_selection.toUpperCase()}\nComputer picks ${computer_selection}\n\nComputer WIN! ROCK beats SCISSORS`);
+            alert(`Player picks ${player_selection}\nComputer picks ${computer_selection}\n\nComputer WIN! ROCK beats SCISSORS`);
         } else if (computer_selection == "PAPER") {
             round_result.player_round_win += 1;
             console.log("YOU WIN! SCISSORS beats PAPER");
-            alert(`Player picks ${player_selection.toUpperCase()}\nComputer picks ${computer_selection}\n\nYou WIN! SCISSORS beats PAPER`);
+            alert(`Player picks ${player_selection}\nComputer picks ${computer_selection}\n\nYou WIN! SCISSORS beats PAPER`);
         } else if (computer_selection == "SCISSORS") {
             console.log("It\'s a DRAW!");
-            alert(`Player picks ${player_selection.toUpperCase()}\nComputer picks ${computer_selection}\n\nIt\'s a DRAW!`);
+            alert(`Player picks ${player_selection}\nComputer picks ${computer_selection}\n\nIt\'s a DRAW!`);
         }
     }
     return round_result;
@@ -115,7 +118,7 @@ const getGameResult = (player_selection, player_round_win, computer_round_win) =
 }
 
 const isDecisionCorrect = (play_again_decision) => {
-    if (play_again_decision.toUpperCase() == "Y" || play_again_decision.toUpperCase() == "YES" || play_again_decision.toUpperCase() == "N" || play_again_decision.toUpperCase() == "NO") {
+    if (play_again_decision == "Y" || play_again_decision == "YES" || play_again_decision == "N" || play_again_decision == "NO") {
         return true;
     }
     return false;
@@ -130,14 +133,22 @@ const playAgain = (player_selection) => {
 
         do {
             play_again_decision = prompt("Do you want to play again? (Y)es / (N)o");
+            if (play_again_decision === null) {
+                console.log("Thank you for playing! Come again next time.");
+                alert("Thank you for playing! Come again next time.");
+                return false;
+            } else {
+                play_again_decision = play_again_decision.toUpperCase().trim();
+            }
         } while (!isDecisionCorrect(play_again_decision));
 
-        if (play_again_decision.toUpperCase() == "Y" || play_again_decision.toUpperCase() == "YES") {
+        if (play_again_decision == "Y" || play_again_decision == "YES") {
             console.clear();
             game();
-        } else if (play_again_decision.toUpperCase() == "N" || play_again_decision.toUpperCase() == "NO") {
+        } else if (play_again_decision == "N" || play_again_decision == "NO") {
             console.log("Thank you for playing! Come again next time.");
             alert("Thank you for playing! Come again next time.");
+            return false;
         }
     }
 }
