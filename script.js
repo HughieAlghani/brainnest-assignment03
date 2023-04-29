@@ -103,13 +103,13 @@ const getGameResult = (player_selection, player_round_win, computer_round_win) =
         console.log(`PLAYER ${player_round_win} - COMPUTER ${computer_round_win}`);
         if (player_round_win > computer_round_win) {
             console.log("CONGRATULATIONS! YOU WIN THE GAME")
-            alert(`GAME OVER\nPLAYER ${player_round_win} - COMPUTER ${computer_round_win}\nCONGRATULATIONS! YOU WIN THE GAME`);
+            alert(`GAME OVER\nPLAYER ${player_round_win} - COMPUTER ${computer_round_win}\n\nCONGRATULATIONS! YOU WIN THE GAME`);
         } else if (computer_round_win > player_round_win) {
             console.log("COMPUTER WIN THE GAME! TRY AGAIN NEXT TIME")
-            alert(`GAME OVER\nPLAYER ${player_round_win} - COMPUTER ${computer_round_win}\nCOMPUTER WIN THE GAME! TRY AGAIN NEXT TIME`);
+            alert(`GAME OVER\nPLAYER ${player_round_win} - COMPUTER ${computer_round_win}\n\nCOMPUTER WIN THE GAME! TRY AGAIN NEXT TIME`);
         } else {
             console.log("THE GAME\'S DRAW! NO ONE WINS")
-            alert(`GAME OVER\nPLAYER ${player_round_win} - COMPUTER ${computer_round_win}\nTHE GAME\'S DRAW! NO ONE WINS`)
+            alert(`GAME OVER\nPLAYER ${player_round_win} - COMPUTER ${computer_round_win}\n\nTHE GAME\'S DRAW! NO ONE WINS`)
         }
     }
 }
